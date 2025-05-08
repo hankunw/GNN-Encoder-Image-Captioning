@@ -4,7 +4,7 @@ from collections import defaultdict
 import torch
 from transformers import GPT2Tokenizer
 from torchvision import transforms
-
+from config import MAX_LENGTH
 
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
@@ -57,7 +57,7 @@ def split_dataset(captions_dict, ratios=(0.6, 0.2, 0.2), seed=42):
         img_names[val_end:]
     )
 
-def collate_fn(batch, m_len):
+def collate_fn(batch, m_len=MAX_LENGTH):
     """自定义批次处理函数"""
     images, texts = zip(*batch)
     

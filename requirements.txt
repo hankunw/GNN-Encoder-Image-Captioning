@@ -1,16 +1,6 @@
-torch==2.5.1+cu124
-torchvision==0.20.1+cu124
-torchaudio==2.5.1
---index-url https://download.pytorch.org/whl/cu124
-
-# PyTorch Geometric dependencies
-torch-scatter
-torch-sparse
-git+https://github.com/pyg-team/pytorch_geometric.git
-
-matplotlib
-tqdm
 transformers
+Pillow
 pycocotools
+matplotlib
 sacrebleu
-argparse
+tqdm

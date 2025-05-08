@@ -50,26 +50,53 @@ The final directory looks like this:
 ```
 
 ### Step 4: 
-Congratulations! Now let's move to environment. We will use python virtual environment to construct the environment
+Congratulations! Now let's move to environment. We will use python virtual environment to construct the environment (Linux/MacOS)
+To create virtual environment, use below commands:
 ```
 python -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
 
+```
+If you use Windows, Please use below commands:
+```
+python -m venv venv
+venv\Scripts\activate
+venv\Scripts\python.exe -m pip install --upgrade pip
+```
+This project used torch==2.5.1+cu124, therefore, to avoid version conflict, please follow below instructions: 
+```
+pip install torch==2.5.1+cu124 torchvision==0.20.1+cu124 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124
+```
+Then please install corresponding version of pyg: 
+```
+pip install -q torch-scatter -f https://data.pyg.org/whl/torch-2.5.1+cu124.html
+pip install -q torch-sparse -f https://data.pyg.org/whl/torch-2.5.1+cu124.html
+pip install -q git+https://github.com/pyg-team/pytorch_geometric.git
+```
+Then install other packages used in this project:
+```
+pip install -r requirements.txt
 ```
 ### Step 5: 
 After setting up the environment, you can run the projects as shown below:
+if you want to train the model, please run below command
 ```
-# if you want to train the model, please run below command
 cd gnn_captioning
 python run.py --mode train --model gcn 
+```
+note that there are three models that are avaliable to be trained: gcn, gat and vit. You can choose one of them 
+After training, two plots will pump out and display the training trend. Meanwhile, one best model checkpoint will be saved under gnn_captioning directory. 
+The saved checkpoint will have name of best_model_[gat, gcn, vit] (based on which model you are choosing).
 
-# note that there are three models that are avaliable to be trained: gcn, gat and vit. You can choose one of them 
-# to evaluate model, you need to specify the model checkpoint and run below command: 
+to evaluate model, you need to specify the model checkpoint and run below command: 
+```
 cd gnn_captioning
 python run.py --mode evaluate --model gat --testset coco --checkpoint \path\to\your\checkpoint
-
-# note that there are two test dataset avaliable: coco and flicker. you can choose one of them
 ```
+note that there are two test dataset avaliable: coco and flicker. you can choose one of them
+
 ### Note: I put the best model checkpoint under gnn_captioning/checkpoints. The file name is best_model_gat.pth. You can feel free to test it. 
+### Note: The default ratio of flicker8k dataset is (0.8, 0.2, 0.0) for (training, val, test). You can refer to flicker_ratio in config.py to make mofifications. 
+### Note: All used hyperparameters are in config.py, please feel free to try out with other hyperparameter sets. 
+
