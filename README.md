@@ -2,7 +2,7 @@
 
 The model architecture is shown below: 
 ```
-├── generate_captioning
+├── gnn_captioning
 |   ├── config.py
 │   ├── data.py
 |   ├── models
@@ -32,7 +32,7 @@ COCO dataset: put coco images into "val2014" and captions into "annotations". Th
 
 The final directory looks like this: 
 ```
-├── generate_captioning
+├── gnn_captioning
 |   ├── val2014
 |   ├── annotations
 |   |   ├── captions_val2014.json
